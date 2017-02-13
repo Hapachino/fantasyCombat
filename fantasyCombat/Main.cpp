@@ -6,9 +6,27 @@
 ** to fight against each other. Winner is displayed. 
 **********************************************************************************************/
 
+#include <iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+#include <ctime>
 
 int main()
 {
+	Barbarian aBarbarian;
+	Vampire aVampire;
+	BlueMen aBlueMen;
+	Medusa aMedusa;
+	HarryPotter aHarryPotter;
+
+	Creature *player1 = &aBlueMen;
+
+	srand(time(NULL));
+
+	cout << player1->defense(5);
+
     return 0;
 }
 

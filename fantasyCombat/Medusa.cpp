@@ -1,49 +1,76 @@
 /**********************************************************************************************
-** Program name: Creature.cpp
+** Program name: Medusa.cpp
 ** Author: Erick Brownfield
 ** Date: 2/14/17
-** Description: Source file for Creature class
+** Description: Source file for Medusa class
 **********************************************************************************************/
 
-#include "Creature.hpp"
+#include "Medusa.hpp"
+#include "Utilities.hpp"
 
 /**********************************************************************************************
-** Function name: Creature::Creature()
+** Function name: Medusa::Medusa()
 ** Description: Default constructor
 **********************************************************************************************/
-Creature::Creature() {
-	armor = 0;
-	strength = 1;
+Medusa::Medusa() {
+	armor = 3;
+	strength = 8;
 }
 
 /**********************************************************************************************
-** Function name: Creature::Creature()
+** Function name: Medusa::Medusa()
 ** Description: Paramatezied constructor
 **********************************************************************************************/
-Creature::Creature(int armor, int strength) {
+Medusa::Medusa(int armor, int strength) : Creature(armor, strength) {
 	this->armor = armor;
 	this->strength = strength;
 }
 
+
 /**********************************************************************************************
-** Function name: Creature::~Creature()
-** Description: Paramatezied constructor
+** Function name: Medusa::~Medusa()
+** Description: Destructor
 **********************************************************************************************/
-Creature::~Creature() {
+Medusa::~Medusa() {
+}
+
+
+/**********************************************************************************************
+** Function name: Medusa::attack()
+** Description: return attack value based on number of dice
+**********************************************************************************************/
+int Medusa::attack() {
+	int diceNumber = 2,
+		diceValue = 6,
+		diceTotal = 0;
+
+	for (int i = 0; i < diceNumber; ++i) {
+		diceTotal += multiRandomRange(1, diceValue);
+	}
+
+	// Glare
+	if (diceTotal == 12) {
+		return 100;
+	}
+
+	return diceTotal;
 }
 
 /**********************************************************************************************
-** Function name: Creature::getArmor()
-** Description: returns armor
+** Function name: Medusa::defense()
+** Description: strength = inputted attack - dice roll total value - armor. Return defense.
+** attack: attack value
 **********************************************************************************************/
-int Creature::getArmor() {
-	return armor;
-}
+int Medusa::defense(int attack) {
+	int diceNumber = 1,
+		diceValue = 6,
+		diceTotal = 0;
 
-/**********************************************************************************************
-** Function name: Creature::getStrength()
-** Description: returns strength
-**********************************************************************************************/
-int Creature::getStrength() {
-	return strength;
+	for (int i = 0; i < diceNumber; ++i) {
+		diceTotal += multiRandomRange(1, diceValue);
+	}
+
+	strength -= attack - (diceTotal + armor);
+
+	return diceTotal;
 }

@@ -19,7 +19,7 @@ public:
 	int getArmor();
 	int getStrength();
 	virtual int attack() = 0;
-	virtual int defense() = 0;
+	virtual int defense(int attack) = 0;
 };
 
 #endif

@@ -1,49 +1,82 @@
 /**********************************************************************************************
-** Program name: Creature.cpp
+** Program name: BlueMen.cpp
 ** Author: Erick Brownfield
 ** Date: 2/14/17
-** Description: Source file for Creature class
+** Description: Source file for BlueMen class
 **********************************************************************************************/
 
 #include "Creature.hpp"
+#include "Utilities.hpp"
 
 /**********************************************************************************************
-** Function name: Creature::Creature()
+** Function name: BlueMen::BlueMen()
 ** Description: Default constructor
 **********************************************************************************************/
-Creature::Creature() {
-	armor = 0;
-	strength = 1;
+BlueMen::BlueMen() {
+	armor = 3;
+	strength = 12;
 }
 
 /**********************************************************************************************
-** Function name: Creature::Creature()
+** Function name: BlueMen::BlueMen()
 ** Description: Paramatezied constructor
 **********************************************************************************************/
-Creature::Creature(int armor, int strength) {
+BlueMen::BlueMen(int armor, int strength) : Creature(armor, strength) {
 	this->armor = armor;
 	this->strength = strength;
 }
 
+
 /**********************************************************************************************
-** Function name: Creature::~Creature()
-** Description: Paramatezied constructor
+** Function name: BlueMen::~BlueMen()
+** Description: Destructor
 **********************************************************************************************/
-Creature::~Creature() {
+BlueMen::~BlueMen() {
+}
+
+
+/**********************************************************************************************
+** Function name: BlueMen::attack()
+** Description: return attack value based on number of dice
+**********************************************************************************************/
+int BlueMen::attack() {
+	int diceNumber = 2,
+		diceValue = 10,
+		diceTotal = 0;
+
+	for (int i = 0; i < diceNumber; ++i) {
+		diceTotal += multiRandomRange(1, diceValue);
+	}
+
+	return diceTotal;
 }
 
 /**********************************************************************************************
-** Function name: Creature::getArmor()
-** Description: returns armor
+** Function name: BlueMen::defense()
+** Description: strength = inputted attack - dice roll total value - armor. Return defense. 
+** attack: attack value
 **********************************************************************************************/
-int Creature::getArmor() {
-	return armor;
-}
+int BlueMen::defense(int attack) {
+	int diceNumber,
+		diceValue = 6,
+		diceTotal = 0;
 
-/**********************************************************************************************
-** Function name: Creature::getStrength()
-** Description: returns strength
-**********************************************************************************************/
-int Creature::getStrength() {
-	return strength;
+	// Mob
+	if (strength > 8) {
+		diceNumber = 3;
+	}
+	else if (strength < 5) {
+		diceNumber = 1;
+	}
+	else {
+		diceNumber = 2;
+	}
+
+	for (int i = 0; i < diceNumber; ++i) {
+		diceTotal += multiRandomRange(1, diceValue);
+	}
+
+	strength -= attack - (diceTotal + armor);
+
+	return diceTotal;
 }

@@ -1,49 +1,77 @@
 /**********************************************************************************************
-** Program name: Creature.cpp
+** Program name: HarryPotter.cpp
 ** Author: Erick Brownfield
 ** Date: 2/14/17
-** Description: Source file for Creature class
+** Description: Source file for HarryPotter class
 **********************************************************************************************/
 
-#include "Creature.hpp"
+#include "HarryPotter.hpp"
 
 /**********************************************************************************************
-** Function name: Creature::Creature()
+** Function name: HarryPotter::HarryPotter()
 ** Description: Default constructor
 **********************************************************************************************/
-Creature::Creature() {
+HarryPotter::HarryPotter() {
 	armor = 0;
-	strength = 1;
+	strength = 10;
+	lives = 2;
 }
 
 /**********************************************************************************************
-** Function name: Creature::Creature()
+** Function name: HarryPotter::HarryPotter()
 ** Description: Paramatezied constructor
 **********************************************************************************************/
-Creature::Creature(int armor, int strength) {
+HarryPotter::HarryPotter(int armor, int strength, int extraLife) : Creature(armor, strength) {
 	this->armor = armor;
 	this->strength = strength;
+	this->lives = extraLife;
+}
+
+
+/**********************************************************************************************
+** Function name: HarryPotter::~HarryPotter()
+** Description: Destructor
+**********************************************************************************************/
+HarryPotter::~HarryPotter() {
+}
+
+
+/**********************************************************************************************
+** Function name: HarryPotter::attack()
+** Description: return attack value based on number of dice
+**********************************************************************************************/
+int HarryPotter::attack() {
+	int diceNumber = 2,
+		diceValue = 6,
+		diceTotal = 0;
+
+	for (int i = 0; i < diceNumber; ++i) {
+		diceTotal += multiRandomRange(1, diceValue);
+	}
+
+	return diceTotal;
 }
 
 /**********************************************************************************************
-** Function name: Creature::~Creature()
-** Description: Paramatezied constructor
+** Function name: HarryPotter::defense()
+** Description: strength = inputted attack - dice roll total value - armor. Return defense.
+** attack: attack value
 **********************************************************************************************/
-Creature::~Creature() {
-}
+int HarryPotter::defense(int attack) {
+	int diceNumber = 2,
+		diceValue = 6,
+		diceTotal = 0;
 
-/**********************************************************************************************
-** Function name: Creature::getArmor()
-** Description: returns armor
-**********************************************************************************************/
-int Creature::getArmor() {
-	return armor;
-}
+	for (int i = 0; i < diceNumber; ++i) {
+		diceTotal += multiRandomRange(1, diceValue);
+	}
 
-/**********************************************************************************************
-** Function name: Creature::getStrength()
-** Description: returns strength
-**********************************************************************************************/
-int Creature::getStrength() {
-	return strength;
+	strength -= attack - (diceTotal + armor);
+
+	// Hogwarts
+	if (strength < 1 && lives > 0) {
+		strength = 20;
+	}
+
+	return diceTotal;
 }

@@ -14,7 +14,6 @@
 using std::cin;
 using std::cout;
 using std::endl;
-using std::getline;
 
 #include <string>
 using std::string;
@@ -26,12 +25,14 @@ using std::stringstream;
 #include <stack>
 using std::stack;
 
-#include "Utilities.hpp"
 #include "Creature.hpp"
 #include "Barbarian.hpp"
 #include "Vampire.hpp"
 #include "Medusa.hpp"
 #include "BlueMen.hpp"
 #include "HarryPotter.hpp"
+
+#include "Utilities.hpp"
+#include "Functions.hpp"
 
 // TODO: reference additional headers your program requires here

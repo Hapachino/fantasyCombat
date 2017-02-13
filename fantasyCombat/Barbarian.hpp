@@ -1,14 +1,14 @@
 /**********************************************************************************************
-** Program name: Creature.cpp
+** Program name: Barbarian.hpp
 ** Author: Erick Brownfield
 ** Date: 2/14/17
-** Description: Source file for Creature class
+** Description: Header file for Barbarian class
 **********************************************************************************************/
-
-#include "Creature.hpp"
 
 #ifndef BARBARIAN_HPP
 #define BARBARIAN_HPP
+
+#include "Creature.hpp"
 
 class Barbarian : public Creature {
 public:
@@ -16,7 +16,7 @@ public:
 	Barbarian(int armor, int strength);
 	~Barbarian();
 	int attack();
-	int defense();
+	int defense(int attack);
 };
 
 #endif

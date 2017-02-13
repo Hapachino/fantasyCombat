@@ -1,49 +1,76 @@
 /**********************************************************************************************
-** Program name: Creature.cpp
+** Program name: Vampire.cpp
 ** Author: Erick Brownfield
 ** Date: 2/14/17
-** Description: Source file for Creature class
+** Description: Source file for Vampire class
 **********************************************************************************************/
 
-#include "Creature.hpp"
+#include "Vampire.hpp"
+#include "Utilities.hpp"
 
 /**********************************************************************************************
-** Function name: Creature::Creature()
+** Function name: Vampire::Vampire()
 ** Description: Default constructor
 **********************************************************************************************/
-Creature::Creature() {
-	armor = 0;
-	strength = 1;
+Vampire::Vampire() {
+	armor = 1;
+	strength = 18;
 }
 
 /**********************************************************************************************
-** Function name: Creature::Creature()
+** Function name: Vampire::Vampire()
 ** Description: Paramatezied constructor
 **********************************************************************************************/
-Creature::Creature(int armor, int strength) {
+Vampire::Vampire(int armor, int strength) : Creature(armor, strength) {
 	this->armor = armor;
 	this->strength = strength;
 }
 
+
 /**********************************************************************************************
-** Function name: Creature::~Creature()
-** Description: Paramatezied constructor
+** Function name: Vampire::~Vampire()
+** Description: Destructor
 **********************************************************************************************/
-Creature::~Creature() {
+Vampire::~Vampire() {
+}
+
+
+/**********************************************************************************************
+** Function name: Vampire::attack()
+** Description: return attack value based on number of dice
+**********************************************************************************************/
+int Vampire::attack() {
+	int diceNumber = 1,
+		diceValue = 12,
+		diceTotal = 0;
+
+	for (int i = 0; i < diceNumber; ++i) {
+		diceTotal += multiRandomRange(1, diceValue);
+	}
+
+	return diceTotal;
 }
 
 /**********************************************************************************************
-** Function name: Creature::getArmor()
-** Description: returns armor
+** Function name: Vampire::defense()
+** Description: strength = inputted attack - dice roll total value - armor. Return defense.
+** attack: attack value
 **********************************************************************************************/
-int Creature::getArmor() {
-	return armor;
-}
+int Vampire::defense(int attack) {
+	int diceNumber = 1,
+		diceValue = 6,
+		diceTotal = 0;
 
-/**********************************************************************************************
-** Function name: Creature::getStrength()
-** Description: returns strength
-**********************************************************************************************/
-int Creature::getStrength() {
-	return strength;
+	for (int i = 0; i < diceNumber; ++i) {
+		diceTotal += multiRandomRange(1, diceValue);
+	}
+
+	// Charm
+	if (multiRandomRange(0, 1)) {
+		attack = 0;
+	}
+
+	strength -= attack - (diceTotal + armor);
+
+	return diceTotal;
 }

@@ -1,14 +1,14 @@
 /**********************************************************************************************
-** Program name: Creature.cpp
+** Program name: Medusa.hpp
 ** Author: Erick Brownfield
 ** Date: 2/14/17
-** Description: Source file for Creature class
+** Description: Header file for Medusa class
 **********************************************************************************************/
-
-#include "Creature.hpp"
 
 #ifndef MEDUSA_HPP
 #define MEDUSA_HPP
+
+#include "Creature.hpp"
 
 class Medusa : public Creature {
 public:
@@ -16,7 +16,7 @@ public:
 	Medusa(int armor, int strength);
 	~Medusa();
 	int attack();
-	int defense();
+	int defense(int attack);
 };
 
 #endif

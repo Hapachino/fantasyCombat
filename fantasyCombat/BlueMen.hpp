@@ -1,12 +1,14 @@
 /**********************************************************************************************
-** Program name: Creature.cpp
+** Program name: BlueMen.hpp
 ** Author: Erick Brownfield
 ** Date: 2/14/17
-** Description: Source file for Creature class
+** Description: Header file for BlueMen class
 **********************************************************************************************/
 
 #ifndef BLUEMEN_HPP
 #define BLUEMEN_HPP
+
+#include "Creature.hpp"
 
 class BlueMen : public Creature {
 public:
@@ -14,7 +16,7 @@ public:
 	BlueMen(int armor, int strength);
 	~BlueMen();
 	int attack();
-	int defense();
+	int defense(int attack);
 };
 
 #endif
