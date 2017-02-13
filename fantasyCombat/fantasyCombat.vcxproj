@@ -88,6 +88,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,17 +146,33 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Barbarian.hpp" />
+    <ClInclude Include="BlueMen.hpp" />
+    <ClInclude Include="Creature.hpp" />
+    <ClInclude Include="Functions.hpp" />
+    <ClInclude Include="HarryPotter.hpp" />
+    <ClInclude Include="Medusa.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Utilities.hpp" />
+    <ClInclude Include="Vampire.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="fantasyCombat.cpp" />
+    <ClCompile Include="Barbarian.cpp" />
+    <ClCompile Include="BlueMen.cpp" />
+    <ClCompile Include="Creature.cpp" />
+    <ClCompile Include="Functions.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="HarryPotter.cpp" />
+    <ClCompile Include="Medusa.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="Vampire.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
