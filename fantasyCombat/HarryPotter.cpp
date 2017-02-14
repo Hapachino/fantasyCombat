@@ -11,9 +11,7 @@
 ** Function name: HarryPotter::HarryPotter()
 ** Description: Default constructor
 **********************************************************************************************/
-HarryPotter::HarryPotter() {
-	armor = 0;
-	strength = 10;
+HarryPotter::HarryPotter() : Creature("Harry Potter", 0, 10) {
 	lives = 2;
 }
 
@@ -21,12 +19,9 @@ HarryPotter::HarryPotter() {
 ** Function name: HarryPotter::HarryPotter()
 ** Description: Paramatezied constructor
 **********************************************************************************************/
-HarryPotter::HarryPotter(int armor, int strength, int extraLife) : Creature(armor, strength) {
-	this->armor = armor;
-	this->strength = strength;
-	this->lives = extraLife;
+HarryPotter::HarryPotter(int armor, int strength, int lives) : Creature("Harry Potter", armor, strength) {
+	this->lives = lives;
 }
-
 
 /**********************************************************************************************
 ** Function name: HarryPotter::~HarryPotter()
@@ -34,7 +29,6 @@ HarryPotter::HarryPotter(int armor, int strength, int extraLife) : Creature(armo
 **********************************************************************************************/
 HarryPotter::~HarryPotter() {
 }
-
 
 /**********************************************************************************************
 ** Function name: HarryPotter::attack()
@@ -66,11 +60,22 @@ int HarryPotter::defense(int attack) {
 		diceTotal += multiRandomRange(1, diceValue);
 	}
 
-	strength -= attack - (diceTotal + armor);
+	int strengthLoss = attack - (diceTotal + armor);
+
+	if (strengthLoss > 0) {
+		strength -= strengthLoss;
+	}
 
 	// Hogwarts
-	if (strength < 1 && lives > 0) {
+	if (strength < 1 && lives > 1) {
 		strength = 20;
+		--lives;
+
+		cout << "Harry Potter used Hogwarts! He has resurrected with 20 strength!\n\n";
+	}
+
+	if (strength < 0) {
+		strength = 0;
 	}
 
 	return diceTotal;

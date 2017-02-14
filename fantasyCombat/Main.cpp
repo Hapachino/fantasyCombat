@@ -6,6 +6,9 @@
 ** to fight against each other. Winner is displayed. 
 **********************************************************************************************/
 
+#include "Creature.hpp"
+#include "Functions.hpp"
+
 #include <iostream>
 using std::cin;
 using std::cout;
@@ -21,11 +24,12 @@ int main()
 	Medusa aMedusa;
 	HarryPotter aHarryPotter;
 
-	Creature *player1 = &aBlueMen;
+	Creature *player1 = &aHarryPotter;
+	Creature *player2 = &aBlueMen;
 
-	srand(time(NULL));
 
-	cout << player1->defense(5);
+
+
 
     return 0;
 }

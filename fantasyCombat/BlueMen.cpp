@@ -12,20 +12,17 @@
 ** Function name: BlueMen::BlueMen()
 ** Description: Default constructor
 **********************************************************************************************/
-BlueMen::BlueMen() {
-	armor = 3;
-	strength = 12;
+BlueMen::BlueMen() : Creature("Blue Men", 3, 12) {
 }
 
 /**********************************************************************************************
 ** Function name: BlueMen::BlueMen()
 ** Description: Paramatezied constructor
 **********************************************************************************************/
-BlueMen::BlueMen(int armor, int strength) : Creature(armor, strength) {
+BlueMen::BlueMen(int armor, int strength) : Creature("Blue Men", armor, strength) {
 	this->armor = armor;
 	this->strength = strength;
 }
-
 
 /**********************************************************************************************
 ** Function name: BlueMen::~BlueMen()
@@ -33,7 +30,6 @@ BlueMen::BlueMen(int armor, int strength) : Creature(armor, strength) {
 **********************************************************************************************/
 BlueMen::~BlueMen() {
 }
-
 
 /**********************************************************************************************
 ** Function name: BlueMen::attack()
@@ -76,7 +72,15 @@ int BlueMen::defense(int attack) {
 		diceTotal += multiRandomRange(1, diceValue);
 	}
 
-	strength -= attack - (diceTotal + armor);
+	int strengthLoss = attack - (diceTotal + armor);
+
+	if (strengthLoss > 0) {
+		strength -= strengthLoss;
+	}
+
+	if (strength < 0) {
+		strength = 0;
+	}
 
 	return diceTotal;
 }

@@ -12,20 +12,15 @@
 ** Function name: Medusa::Medusa()
 ** Description: Default constructor
 **********************************************************************************************/
-Medusa::Medusa() {
-	armor = 3;
-	strength = 8;
+Medusa::Medusa() : Creature("Medusa", 3, 8) {
 }
 
 /**********************************************************************************************
 ** Function name: Medusa::Medusa()
 ** Description: Paramatezied constructor
 **********************************************************************************************/
-Medusa::Medusa(int armor, int strength) : Creature(armor, strength) {
-	this->armor = armor;
-	this->strength = strength;
+Medusa::Medusa(int armor, int strength) : Creature("Medusa", armor, strength) {
 }
-
 
 /**********************************************************************************************
 ** Function name: Medusa::~Medusa()
@@ -33,7 +28,6 @@ Medusa::Medusa(int armor, int strength) : Creature(armor, strength) {
 **********************************************************************************************/
 Medusa::~Medusa() {
 }
-
 
 /**********************************************************************************************
 ** Function name: Medusa::attack()
@@ -50,7 +44,9 @@ int Medusa::attack() {
 
 	// Glare
 	if (diceTotal == 12) {
-		return 100;
+		return 99;
+
+		cout << "Medusa used Glare! Her foe has been petrified!\n\n";
 	}
 
 	return diceTotal;
@@ -70,7 +66,15 @@ int Medusa::defense(int attack) {
 		diceTotal += multiRandomRange(1, diceValue);
 	}
 
-	strength -= attack - (diceTotal + armor);
+	int strengthLoss = attack - (diceTotal + armor);
+
+	if (strengthLoss > 0) {
+		strength -= strengthLoss;
+	}
+
+	if (strength < 0) {
+		strength = 0;
+	}
 
 	return diceTotal;
 }

@@ -12,20 +12,17 @@
 ** Function name: Vampire::Vampire()
 ** Description: Default constructor
 **********************************************************************************************/
-Vampire::Vampire() {
-	armor = 1;
-	strength = 18;
+Vampire::Vampire() : Creature("Vampire", 1, 18) {
 }
 
 /**********************************************************************************************
 ** Function name: Vampire::Vampire()
 ** Description: Paramatezied constructor
 **********************************************************************************************/
-Vampire::Vampire(int armor, int strength) : Creature(armor, strength) {
+Vampire::Vampire(int armor, int strength) : Creature("Vampire", armor, strength) {
 	this->armor = armor;
 	this->strength = strength;
 }
-
 
 /**********************************************************************************************
 ** Function name: Vampire::~Vampire()
@@ -33,7 +30,6 @@ Vampire::Vampire(int armor, int strength) : Creature(armor, strength) {
 **********************************************************************************************/
 Vampire::~Vampire() {
 }
-
 
 /**********************************************************************************************
 ** Function name: Vampire::attack()
@@ -68,9 +64,19 @@ int Vampire::defense(int attack) {
 	// Charm
 	if (multiRandomRange(0, 1)) {
 		attack = 0;
+
+		cout << "Vampire used Charm! No damage was dealt!\n\n";
 	}
 
-	strength -= attack - (diceTotal + armor);
+	int strengthLoss = attack - (diceTotal + armor);
+
+	if (strengthLoss > 0) {
+		strength -= strengthLoss;
+	}
+
+	if (strength < 0) {
+		strength = 0;
+	}
 
 	return diceTotal;
 }

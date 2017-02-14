@@ -7,11 +7,15 @@
 
 #include "Creature.hpp"
 
+#include <string>
+using std::string;
+
 /**********************************************************************************************
 ** Function name: Creature::Creature()
 ** Description: Default constructor
 **********************************************************************************************/
 Creature::Creature() {
+	character = "Creature";
 	armor = 0;
 	strength = 1;
 }
@@ -20,7 +24,8 @@ Creature::Creature() {
 ** Function name: Creature::Creature()
 ** Description: Paramatezied constructor
 **********************************************************************************************/
-Creature::Creature(int armor, int strength) {
+Creature::Creature(string character, int armor, int strength) {
+	this->character = character;
 	this->armor = armor;
 	this->strength = strength;
 }
@@ -46,4 +51,12 @@ int Creature::getArmor() {
 **********************************************************************************************/
 int Creature::getStrength() {
 	return strength;
+}
+
+/**********************************************************************************************
+** Function name: Creature::getName()
+** Description: return character type
+**********************************************************************************************/
+string Creature::getCharacter() {
+	return character;
 }

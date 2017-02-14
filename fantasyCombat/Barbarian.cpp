@@ -12,20 +12,17 @@
 ** Function name: Barbarian::Barbarian()
 ** Description: Default constructor
 **********************************************************************************************/
-Barbarian::Barbarian() {
-	armor = 0;
-	strength = 12;
+Barbarian::Barbarian() : Creature("Barbarian", 0, 12) {
 }
 
 /**********************************************************************************************
 ** Function name: Barbarian::Barbarian()
 ** Description: Paramatezied constructor
 **********************************************************************************************/
-Barbarian::Barbarian(int armor, int strength) : Creature(armor, strength) {
+Barbarian::Barbarian(int armor, int strength) : Creature("Barbarian", armor, strength) {
 	this->armor = armor;
 	this->strength = strength;
 }
-
 
 /**********************************************************************************************
 ** Function name: Barbarian::~Barbarian()
@@ -33,7 +30,6 @@ Barbarian::Barbarian(int armor, int strength) : Creature(armor, strength) {
 **********************************************************************************************/
 Barbarian::~Barbarian() {
 }
-
 
 /**********************************************************************************************
 ** Function name: Barbarian::attack()
@@ -65,7 +61,15 @@ int Barbarian::defense(int attack) {
 		diceTotal += multiRandomRange(1, diceValue);
 	}
 
-	strength -= attack - (diceTotal + armor);
+	int strengthLoss = attack - (diceTotal + armor);
+
+	if (strengthLoss > 0) {
+		strength -= strengthLoss;
+	}
+
+	if (strength < 0) {
+		strength = 0;
+	}
 
 	return diceTotal;
 }
